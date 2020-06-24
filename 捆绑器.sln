@@ -5,7 +5,9 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "捆绑器", "捆绑器\捆绑器.vcxproj", "{0EF69C0F-69D5-440B-86B2-029B14F4FCB9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceOut", "ResourceOut\ResourceOut.vcxproj", "{01E9CC69-1EFD-4EA4-A3E4-8A55B73EF6C9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "decompressResourceOut", "ResourceOut\ResourceOut.vcxproj", "{01E9CC69-1EFD-4EA4-A3E4-8A55B73EF6C9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "directResourceOut", "directResourceOut\directResourceOut.vcxproj", "{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{01E9CC69-1EFD-4EA4-A3E4-8A55B73EF6C9}.Release|x64.Build.0 = Release|x64
 		{01E9CC69-1EFD-4EA4-A3E4-8A55B73EF6C9}.Release|x86.ActiveCfg = Release|Win32
 		{01E9CC69-1EFD-4EA4-A3E4-8A55B73EF6C9}.Release|x86.Build.0 = Release|Win32
+		{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}.Debug|x64.ActiveCfg = Debug|x64
+		{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}.Debug|x64.Build.0 = Debug|x64
+		{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}.Debug|x86.ActiveCfg = Debug|Win32
+		{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}.Debug|x86.Build.0 = Debug|Win32
+		{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}.Release|x64.ActiveCfg = Release|x64
+		{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}.Release|x64.Build.0 = Release|x64
+		{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}.Release|x86.ActiveCfg = Release|Win32
+		{6210FCB3-DB2A-490E-A1FA-721268FC2CBE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -41,7 +41,6 @@ public:
 	CComboBox Evpath;
 	CString FileName;
 	CString IcoPath;
-	BOOL AutoDel;
 	afx_msg void OnBnClickedBuild();
 	afx_msg void OnBnClickedBrowser();
 	afx_msg void OnBnClickedAdd();
@@ -51,6 +50,7 @@ public:
 	afx_msg void OnEditDelall();
 	afx_msg void OnNMRClickFiles(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnBnClickedAddico();
+	BOOL m_compress;
 };
 
 struct  FILEINFO
@@ -58,6 +58,12 @@ struct  FILEINFO
 	int method;
 	char path[MAX_PATH] = { 0 };
 	int fileSzie;
+};
+
+struct DIRFILEINFO
+{
+	UINT method;
+	char path[MAX_PATH] = { 0 };
 };
 
 typedef struct tagHEADER

